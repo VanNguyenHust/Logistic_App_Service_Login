@@ -12,9 +12,7 @@ CREATE TABLE users(
     full_name VARCHAR(100),
     is_active TINYINT(1) DEFAULT 1,
     created_at DATETIME NOT NULL,
-    updaetd_at DATETIME NOT NULL,
-    role_id INT NOT NULL,
-    FOREIGN KEY (role_id) REFERENCES roles(id)
+    updated_at DATETIME NOT NULL,
 );
 
 CREATE TABLE user_logins(
@@ -22,8 +20,12 @@ CREATE TABLE user_logins(
     user_name VARCHAR(100) NOT NULL,
     password VARCHAR(100) NOT NULL,
     login_type ENUM('phone_number', 'email'),
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
+    role_id INT NOT NULL,
+    FOREIGN KEY (role_id) REFERENCES roles(id)
 );
 
 CREATE TABLE tokens(
@@ -33,9 +35,9 @@ CREATE TABLE tokens(
     expiration_date DATETIME,
     revoked TINYINT(1) NOT NULL,
     expired TINYINT(1) NOT NULL,
-    user_id INT,
     is_mobile TINYINT(1), 
     refresh_expiration_date DATETIME,
     refresh_token LONGTEXT,
-    FOREIGN KEY(user_id) REFERENCES users(id)
+    user_login_id INT,
+    FOREIGN KEY(user_login_id) REFERENCES user_logins(id)
 );
