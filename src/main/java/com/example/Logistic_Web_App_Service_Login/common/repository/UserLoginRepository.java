@@ -8,10 +8,14 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import com.example.Logistic_Web_App_Service_Login.common.entity.Role;
 import com.example.Logistic_Web_App_Service_Login.common.entity.UserLogin;
 
+
+
 public interface UserLoginRepository extends JpaRepository<UserLogin, Long>{
 	boolean existsByUserName(String userName);
 	
 	Set<UserLogin> findByRole(Role role);
 	
-	Optional<UserLogin> findByUserName(String username);
+	Optional<UserLogin> findByUserNameAndLoginType(String userName, String loginType);
+	
+	Optional<UserLogin> findByUserName(String userName);
 }

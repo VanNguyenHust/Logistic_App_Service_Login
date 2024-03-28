@@ -2,7 +2,6 @@ package com.example.Logistic_Web_App_Service_Login.modules.userlogin.response;
 
 import java.util.List;
 
-import com.example.Logistic_Web_App_Service_Login.common.entity.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AccessLevel;
@@ -19,7 +18,7 @@ import lombok.experimental.FieldDefaults;
 @NoArgsConstructor
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
-public class UserLoginResponse {
+public class LoginResponse {
 	@JsonProperty("message")
 	String message;
 
@@ -28,19 +27,13 @@ public class UserLoginResponse {
 
 	@JsonProperty("refresh_token")
 	String refreshToken;
-
-	@JsonProperty("token_type")
+	
 	String tokenType = "Bearer";
-
+	
 	// user's detail
 	Long id;
-
-	@JsonProperty("user_name")
-	String userName;
-
-	@JsonProperty("role_name")
-	List<String> roles;
 	
-	@JsonProperty("user")
-	User user;
+	String username;
+
+	List<String> roles;
 }

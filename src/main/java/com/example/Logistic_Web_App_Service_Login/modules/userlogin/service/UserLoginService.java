@@ -17,6 +17,7 @@ import com.example.Logistic_Web_App_Service_Login.common.entity.User;
 import com.example.Logistic_Web_App_Service_Login.common.entity.UserLogin;
 import com.example.Logistic_Web_App_Service_Login.common.enums.StatusRole;
 import com.example.Logistic_Web_App_Service_Login.common.exceptions.DataNotFoundException;
+import com.example.Logistic_Web_App_Service_Login.common.exceptions.ExpiredTokenException;
 import com.example.Logistic_Web_App_Service_Login.common.exceptions.InvalidPasswordException;
 import com.example.Logistic_Web_App_Service_Login.common.repository.TokenRepository;
 import com.example.Logistic_Web_App_Service_Login.common.repository.UserLoginRepository;
@@ -79,8 +80,8 @@ public class UserLoginService implements IUserLoginService {
 	}
 
 	@Override
-	public String login(String userName, String password, Long roleId) throws Exception {
-		Optional<UserLogin> optionalUserLogin = userLoginRepository.findByUserName(userName);
+	public String login(String userName, String password, String loginType) throws Exception {
+		Optional<UserLogin> optionalUserLogin = userLoginRepository.findByUserNameAndLoginType(userName, loginType);
 
 		if (optionalUserLogin.isEmpty()) {
 			throw new DataNotFoundException("Invalid phone number or password");
@@ -90,6 +91,7 @@ public class UserLoginService implements IUserLoginService {
 
 		UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(userName,
 				password);
+		
 		authenticationManager.authenticate(authenticationToken);
 
 		return jwtTokenUtil.generateToken(existingUserLogin);
@@ -108,6 +110,27 @@ public class UserLoginService implements IUserLoginService {
 		for (Token token : tokens) {
 			tokenRepository.delete(token);
 		}
+	}
+
+	@Override
+	public UserLogin getUserLoginDetailsFromToken(String token) throws Exception {
+		if(jwtTokenUtil.isTokenExpired(token)) {
+            throw new ExpiredTokenException("Token is expired");
+        }
+        String userName = jwtTokenUtil.extractUserName(token);
+        Optional<UserLogin> userLogin = userLoginRepository.findByUserName(userName);
+
+        if (userLogin.isPresent()) {
+            return userLogin.get();
+        } else {
+            throw new Exception("User not found");
+        }
+	}
+
+	@Override
+	public UserLogin getUserLoginDetailsFromRefreshToken(String refreshToken) throws Exception {
+		Token existingToken = tokenRepository.findByRefreshToken(refreshToken);
+        return getUserLoginDetailsFromToken(existingToken.getToken());
 	}
 
 }

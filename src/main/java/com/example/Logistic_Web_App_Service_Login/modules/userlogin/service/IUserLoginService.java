@@ -10,7 +10,11 @@ public interface IUserLoginService {
 
 	UserLogin getUserById(Long userId);
 	
-	String login(String userName, String password, Long roleId) throws Exception;
+	String login(String userName, String password, String loginType) throws Exception;
 
+	UserLogin getUserLoginDetailsFromToken(String token) throws Exception;
+
+	UserLogin getUserLoginDetailsFromRefreshToken(String refreshToken) throws Exception;
+	
 	void resetPassword(Long userLoginId, String newPassword) throws InvalidPasswordException, DataNotFoundException;
 }

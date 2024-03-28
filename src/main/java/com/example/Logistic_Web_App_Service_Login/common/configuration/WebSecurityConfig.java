@@ -35,8 +35,8 @@ public class WebSecurityConfig {
 	SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
 		http.addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
 				.authorizeHttpRequests(requests -> {
-					requests.requestMatchers(String.format("%s/user/register", apiPrefix),
-							String.format("%s/user/login", apiPrefix),
+					requests.requestMatchers(String.format("%s/user-login/register", apiPrefix),
+							String.format("%s/user-login", apiPrefix),
 							// healthcheck
 							String.format("%s/healthcheck/**", apiPrefix),
 
