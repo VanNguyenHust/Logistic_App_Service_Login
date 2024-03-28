@@ -8,7 +8,7 @@ import com.example.Logistic_Web_App_Service_Login.modules.userlogin.dto.UserLogi
 public interface IUserLoginService {
 	UserLogin createUserLogin(UserLoginDTO userLoginDTO) throws Exception;
 
-	UserLogin getUserById(Long userId);
+	UserLogin getUserLoginById(Long userLoginId);
 	
 	String login(String userName, String password, String loginType) throws Exception;
 

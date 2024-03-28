@@ -74,7 +74,7 @@ public class UserLoginService implements IUserLoginService {
 	}
 
 	@Override
-	public UserLogin getUserById(Long userLoginId) {
+	public UserLogin getUserLoginById(Long userLoginId) {
 		return userLoginRepository.findById(userLoginId)
 				.orElseThrow(() -> new RuntimeException(String.format("User with id = %d not found", userLoginId)));
 	}
@@ -100,7 +100,7 @@ public class UserLoginService implements IUserLoginService {
 	@Override
 	public void resetPassword(Long userLoginId, String newPassword)
 			throws InvalidPasswordException, DataNotFoundException {
-		UserLogin existingUserLogin = getUserById(userLoginId);
+		UserLogin existingUserLogin = getUserLoginById(userLoginId);
 
 		String encodedPassword = passwordEncoder.encode(newPassword);
 		existingUserLogin.setPassword(encodedPassword);

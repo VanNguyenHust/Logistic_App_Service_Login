@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -23,6 +25,7 @@ import com.example.Logistic_Web_App_Service_Login.common.utils.MessageKeys;
 import com.example.Logistic_Web_App_Service_Login.common.utils.ResponseObject;
 import com.example.Logistic_Web_App_Service_Login.modules.token.dto.RefreshTokenDTO;
 import com.example.Logistic_Web_App_Service_Login.modules.token.service.TokenService;
+import com.example.Logistic_Web_App_Service_Login.modules.userlogin.dto.ChangePasswordDTO;
 import com.example.Logistic_Web_App_Service_Login.modules.userlogin.dto.UserLoginDTO;
 import com.example.Logistic_Web_App_Service_Login.modules.userlogin.mapper.UserLoginMapper;
 import com.example.Logistic_Web_App_Service_Login.modules.userlogin.response.UserLoginResponse;
@@ -38,6 +41,7 @@ import lombok.RequiredArgsConstructor;
 public class UserLoginController {
 	private final UserLoginService userLoginService;
 	private final TokenService tokenService;
+	private final AuthenticationManager authenticationManager;
 	
 	private final LocalizationUtils localizationUtils;
 	
@@ -130,10 +134,52 @@ public class UserLoginController {
     @PreAuthorize("hasRole('ROLE_USER')")
     public ResponseEntity<ResponseObject> resetPassword(@Valid @PathVariable long userLoginId){
         try {
-            String newPassword = UUID.randomUUID().toString().substring(0, 5); // Tạo mật khẩu mới
+            String newPassword = UUID.randomUUID().toString().substring(0, 5);
             userLoginService.resetPassword(userLoginId, newPassword);
             return ResponseEntity.ok(ResponseObject.builder()
                             .message("Reset password successfully")
+                            .data(newPassword)
+                            .status(HttpStatus.OK)
+                    .build());
+        } catch (InvalidPasswordException e) {
+            return ResponseEntity.ok(ResponseObject.builder()
+                    .message("Invalid password")
+                    .data("")
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build());
+        } catch (DataNotFoundException e) {
+            return ResponseEntity.ok(ResponseObject.builder()
+                    .message("User not found")
+                    .data("")
+                    .status(HttpStatus.BAD_REQUEST)
+                    .build());
+        }
+    }
+	
+	@PutMapping("/change-password/{userLoginId}")
+    @PreAuthorize("hasRole('ROLE_USER')")
+    public ResponseEntity<ResponseObject> changePassword(@Valid @PathVariable long userLoginId, @Valid @RequestBody ChangePasswordDTO changePasswordDTO){
+        try {
+        	UserLogin existingUserLogin = userLoginService.getUserLoginById(userLoginId);
+        	
+        	UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(existingUserLogin.getUsername(),
+    				changePasswordDTO.getOldPassword());
+    		
+    		authenticationManager.authenticate(authenticationToken);
+        	    		
+        	if (!changePasswordDTO.getNewPassword().equals(changePasswordDTO.getReNewPassword())) {
+        		return ResponseEntity.ok(ResponseObject.builder()
+        				.message("Newpassword must equals reNewPassword")
+        				.data("")
+        				.status(HttpStatus.BAD_REQUEST)
+        				.build());
+        	}
+        	
+        	String newPassword = changePasswordDTO.getNewPassword();
+        	
+            userLoginService.resetPassword(userLoginId, newPassword);
+            return ResponseEntity.ok(ResponseObject.builder()
+                            .message("Change password successfully")
                             .data(newPassword)
                             .status(HttpStatus.OK)
                     .build());
