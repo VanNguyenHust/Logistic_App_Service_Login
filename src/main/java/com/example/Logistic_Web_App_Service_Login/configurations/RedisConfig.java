@@ -1,37 +1,62 @@
 package com.example.Logistic_Web_App_Service_Login.configurations;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Primary;
-import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.connection.RedisStandaloneConfiguration;
 import org.springframework.data.redis.connection.lettuce.LettuceConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
+import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
+import org.springframework.data.redis.serializer.StringRedisSerializer;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.datatype.jsr310.deser.LocalDateTimeDeserializer;
+import com.fasterxml.jackson.datatype.jsr310.ser.LocalDateTimeSerializer;
 
 @Configuration
 public class RedisConfig {
-	@Value("${spring.redis.data.host}")
-    private String redisHost;
+	private static final Logger logger = LoggerFactory.getLogger(RedisConfig.class);
 
-    @Value("${spring.redis.data.port}")
-    private int redisPort;
-    
-    @Bean
-    LettuceConnectionFactory redisConnectionFactory() {
-        // Tạo Standalone Connection tới Redis
-        return new LettuceConnectionFactory(new RedisStandaloneConfiguration(redisHost, redisPort));
-    }
+	@Value("${spring.data.redis.host}")
+	private String redisHost;
 
-    @Bean
-    @Primary
-    RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory redisConnectionFactory) {
-        // Tạo một RedisTemplate
-        // Với Key là Object
-        // Value là Object
-        // RedisTemplate giúp chúng ta thao tác với Redis
-        RedisTemplate<Object, Object> template = new RedisTemplate<>();
-        template.setConnectionFactory(redisConnectionFactory);
-        return template;
-    }
+	@Value("${spring.data.redis.port}")
+	private int redisPort;
+
+	@Bean
+	LettuceConnectionFactory redisConnectionFactory() {
+		logger.info(String.format("redisHost = %s, redisPort = %d", redisHost, redisPort));
+		RedisStandaloneConfiguration configuration = new RedisStandaloneConfiguration(redisHost, redisPort);
+		return new LettuceConnectionFactory(configuration);
+	}
+	
+	@Bean
+	RedisTemplate<String, Object> redisTemplate() {
+		RedisTemplate<String, Object> template = new RedisTemplate<>();
+		template.setConnectionFactory(redisConnectionFactory());
+
+		template.setKeySerializer(new StringRedisSerializer());
+		template.setValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+
+		template.setHashKeySerializer(new StringRedisSerializer());
+		template.setHashValueSerializer(new Jackson2JsonRedisSerializer<>(Object.class));
+		template.afterPropertiesSet();
+		return template;
+	}
+
+	@Bean
+	ObjectMapper redisObjectMapper() {
+		ObjectMapper objectMapper = new ObjectMapper();
+		SimpleModule module = new SimpleModule();
+		module.addSerializer(LocalDateTime.class, new LocalDateTimeSerializer(DateTimeFormatter.ISO_DATE_TIME));
+		module.addDeserializer(LocalDateTime.class, new LocalDateTimeDeserializer(DateTimeFormatter.ISO_DATE_TIME));
+		objectMapper.registerModule(module);
+		return objectMapper;
+	}
 }

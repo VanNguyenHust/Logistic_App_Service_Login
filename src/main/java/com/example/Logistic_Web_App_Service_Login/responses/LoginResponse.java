@@ -28,12 +28,14 @@ public class LoginResponse {
 	@JsonProperty("refresh_token")
 	String refreshToken;
 	
+	@JsonProperty("token_type")
 	String tokenType = "Bearer";
 	
 	// user's detail
 	Long id;
 	
-	String username;
+	@JsonProperty("user_name")
+	String userName;
 
 	List<String> roles;
 }

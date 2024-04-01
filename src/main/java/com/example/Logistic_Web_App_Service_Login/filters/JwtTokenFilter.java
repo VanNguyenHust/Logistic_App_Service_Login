@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.util.Pair;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -14,8 +15,11 @@ import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import com.example.Logistic_Web_App_Service_Login.components.JwtTokenUtil;
+import com.example.Logistic_Web_App_Service_Login.mappers.UserLoginMapper;
 import com.example.Logistic_Web_App_Service_Login.models.User;
 import com.example.Logistic_Web_App_Service_Login.models.UserLogin;
+import com.example.Logistic_Web_App_Service_Login.responses.UserLoginResponse;
+import com.example.Logistic_Web_App_Service_Login.services.userlogin.UserLoginRedisService;
 
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
@@ -29,8 +33,13 @@ import lombok.RequiredArgsConstructor;
 public class JwtTokenFilter extends OncePerRequestFilter {
 	@Value("${api.prefix}")
 	private String apiPrefix;
+
 	private final UserDetailsService userDetailsService;
+	private final UserLoginRedisService userLoginRedisService;
 	private final JwtTokenUtil jwtTokenUtil;
+	
+	@Autowired
+	UserLoginMapper userLoginMapper;
 
 	@Override
 	protected void doFilterInternal(@NonNull HttpServletRequest request, @NonNull HttpServletResponse response,
@@ -46,11 +55,20 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 				return;
 			}
 			final String token = authHeader.substring(7);
-			final String userName = jwtTokenUtil.extractUserName(token);
+			final String userName = jwtTokenUtil.extractUsername(token);
 			if (userName != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-				UserLogin userDetails = (UserLogin) userDetailsService.loadUserByUsername(userName);
+				UserLoginResponse userDetails = userLoginRedisService.loadUserByUsername(userName);
+
+				if (userDetails == null) {
+ 					UserLogin userLogin = (UserLogin) userDetailsService.loadUserByUsername(userName);
+ 					
+ 					userDetails = userLoginMapper.mapTopUserLoginResponse(userLogin);
+					
+					userLoginRedisService.saveUserLoginByUsername(userName, userDetails);
+				}
+
 				User user = userDetails.getUser();
-				
+
 				if (jwtTokenUtil.validateToken(token, userDetails, user)) {
 					UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(
 							userDetails, null, userDetails.getAuthorities());

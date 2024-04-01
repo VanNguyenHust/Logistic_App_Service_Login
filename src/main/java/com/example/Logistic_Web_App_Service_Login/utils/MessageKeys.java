@@ -8,4 +8,7 @@ public class MessageKeys {
 	public static final String CREATE_USER_LOGIN_SUCCESSFULLY = "user_login.create_successfully";
 	public static final String RESET_PASSWORD_SUCCESSFULLY = "user_login.reset_password_create_successfully";
 	public static final String USER_LOGIN_NOT_FOUND = "user_login.not_found";
+	
+	public static final String GET_ALL_USER_CONTAIN_KEYWORD_SUCCESSFULLY = "user.get_all_user_contain_keyword.successfully"; 
+	public static final String CREATE_USER_SUCCESSFULLY = "user.create.successfully";
 }

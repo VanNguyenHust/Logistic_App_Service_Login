@@ -23,4 +23,8 @@ public class RefreshTokenDTO {
 	@NotBlank
 	@JsonProperty("refresh_token")
 	String refreshToken;
+	
+	@NotBlank
+	@JsonProperty("token_type")
+	String tokenType = "Bearer";
 }

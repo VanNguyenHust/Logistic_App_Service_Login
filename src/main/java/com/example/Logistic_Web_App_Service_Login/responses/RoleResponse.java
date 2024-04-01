@@ -23,6 +23,6 @@ public class RoleResponse {
 	@JsonProperty("errors")
 	private List<String> errors;
 
-	@JsonProperty("category")
+	@JsonProperty("role")
 	private Role role;
 }

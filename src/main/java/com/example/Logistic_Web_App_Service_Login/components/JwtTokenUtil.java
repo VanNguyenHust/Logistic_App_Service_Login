@@ -15,6 +15,7 @@ import com.example.Logistic_Web_App_Service_Login.models.Token;
 import com.example.Logistic_Web_App_Service_Login.models.User;
 import com.example.Logistic_Web_App_Service_Login.models.UserLogin;
 import com.example.Logistic_Web_App_Service_Login.repositories.TokenRepository;
+import com.example.Logistic_Web_App_Service_Login.responses.UserLoginResponse;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
@@ -80,13 +81,13 @@ public class JwtTokenUtil {
 		return expirationDate.before(new Date());
 	}
 	
-	public String extractUserName(String token) {
+	public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 	
-	public boolean validateToken(String token, UserLogin userDetails, User user) {
+	public boolean validateToken(String token, UserLoginResponse userDetails, User user) {
         try {
-            String userName = extractUserName(token);
+            String username = extractUsername(token);
             Token existingToken = tokenRepository.findByToken(token);
             if(existingToken == null ||
                     existingToken.isRevoked() == true ||
@@ -94,7 +95,7 @@ public class JwtTokenUtil {
             ) {
                 return false;
             }
-            return (userName.equals(userDetails.getUsername()))
+            return (username.equals(userDetails.getUsername()))
                     && !isTokenExpired(token);
         } catch (MalformedJwtException e) {
             logger.error("Invalid JWT token: {}", e.getMessage());

@@ -23,6 +23,6 @@ public class UserResponse {
 	@JsonProperty("errors")
 	private List<String> errors;
 
-	@JsonProperty("category")
+	@JsonProperty("user")
 	private User user;
 }

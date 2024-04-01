@@ -21,9 +21,9 @@ public class SecurityConfig {
 
 	@Bean
 	UserDetailsService userDetailsService() {
-		return userName -> {
-			return userLoginRepository.findByUserName(userName)
-					.orElseThrow(() -> new RuntimeException("Cannot find user with phoneNumber = " + userName));
+		return username -> {
+			return userLoginRepository.findByUsername(username)
+					.orElseThrow(() -> new RuntimeException("Cannot find user with phoneNumber = " + username));
 		};
 	}
 

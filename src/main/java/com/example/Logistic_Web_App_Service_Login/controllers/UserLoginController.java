@@ -26,8 +26,10 @@ import com.example.Logistic_Web_App_Service_Login.exceptions.InvalidPasswordExce
 import com.example.Logistic_Web_App_Service_Login.mappers.UserLoginMapper;
 import com.example.Logistic_Web_App_Service_Login.models.Token;
 import com.example.Logistic_Web_App_Service_Login.models.UserLogin;
+import com.example.Logistic_Web_App_Service_Login.responses.LoginResponse;
 import com.example.Logistic_Web_App_Service_Login.responses.UserLoginResponse;
 import com.example.Logistic_Web_App_Service_Login.services.token.TokenService;
+import com.example.Logistic_Web_App_Service_Login.services.userlogin.UserLoginRedisService;
 import com.example.Logistic_Web_App_Service_Login.services.userlogin.UserLoginService;
 import com.example.Logistic_Web_App_Service_Login.utils.MessageKeys;
 import com.example.Logistic_Web_App_Service_Login.utils.ResponseObject;
@@ -41,6 +43,8 @@ import lombok.RequiredArgsConstructor;
 @RequestMapping(value = Uri.USER_LOGIN)
 public class UserLoginController {
 	private final UserLoginService userLoginService;
+	private final UserLoginRedisService userLoginRedisService;
+	
 	private final TokenService tokenService;
 	private final AuthenticationManager authenticationManager;
 	
@@ -58,7 +62,7 @@ public class UserLoginController {
 		UserLogin userLogin = userLoginService.createUserLogin(userLoginDTO);
 		
 		UserLoginResponse userLoginResponse = userLoginMapper.mapTopUserLoginResponse(userLogin);
-		userLoginResponse.setRoles(userLogin.getAuthorities().stream().map(item -> item.getAuthority()).toList());
+		userLoginResponse.setRole(userLogin.getRole());
 		
 		return ResponseEntity.ok(ResponseObject.builder()
 				.message(localizationUtils.getLocalizedMessage(MessageKeys.CREATE_USER_LOGIN_SUCCESSFULLY))
@@ -88,41 +92,52 @@ public class UserLoginController {
         String userLoginAgent = request.getHeader("User-Agent");
         UserLogin userLoginDetail = userLoginService.getUserLoginDetailsFromToken(token);
         Token jwtToken = tokenService.addToken(userLoginDetail, token, isMobileDevice(userLoginAgent));
-
-        UserLoginResponse userLoginResponse = UserLoginResponse.builder()
+        
+        userLoginRedisService.saveToken(jwtToken, userLoginDetail);
+        
+        LoginResponse loginResponse = LoginResponse.builder()
                 .token(jwtToken.getToken())
                 .tokenType(jwtToken.getTokenType())
                 .refreshToken(jwtToken.getRefreshToken())
                 .userName(userLoginDetail.getUsername())
                 .roles(userLoginDetail.getAuthorities().stream().map(item -> item.getAuthority()).toList())
-                .id(userLoginDetail.getId())
+                .id(jwtToken.getId())
                 .build();
         
         return ResponseEntity.ok().body(ResponseObject.builder()
                         .message(localizationUtils.getLocalizedMessage(MessageKeys.LOGIN_SUCCESSFULLY))
-                        .data(userLoginResponse)
+                        .data(loginResponse)
                         .status(HttpStatus.OK)
-                .build());
+                        .build());
     }
 	
 	@PostMapping("/refresh-token")
     public ResponseEntity<ResponseObject> refreshToken(
             @Valid @RequestBody RefreshTokenDTO refreshTokenDTO
     ) throws Exception {
-        UserLogin userLoginDetail = userLoginService.getUserLoginDetailsFromRefreshToken(refreshTokenDTO.getRefreshToken());
+        UserLogin userLoginDetail = userLoginRedisService.getUserLoginDetailsFromRefreshToken(refreshTokenDTO.getRefreshToken(), refreshTokenDTO.getTokenType());
+        
+        if (userLoginDetail == null) {
+        	userLoginDetail = userLoginService.getUserLoginDetailsFromRefreshToken(refreshTokenDTO.getRefreshToken());
+        }
+        
         Token jwtToken = tokenService.refreshToken(refreshTokenDTO.getRefreshToken(), userLoginDetail);
-        UserLoginResponse userLoginResponse = UserLoginResponse.builder()
+        
+        userLoginRedisService.clear();
+        userLoginRedisService.saveToken(jwtToken, userLoginDetail);
+        
+        LoginResponse loginResponse = LoginResponse.builder()
                 .token(jwtToken.getToken())
                 .tokenType(jwtToken.getTokenType())
                 .refreshToken(jwtToken.getRefreshToken())
                 .userName(userLoginDetail.getUsername())
                 .roles(userLoginDetail.getAuthorities().stream().map(item -> item.getAuthority()).toList())
-                .id(userLoginDetail.getId())
+                .id(jwtToken.getId())
                 .build();
         
         return ResponseEntity.ok().body(
                 ResponseObject.builder()
-                        .data(userLoginResponse)
+                        .data(loginResponse)
                         .message(localizationUtils.getLocalizedMessage(MessageKeys.REFRESH_TOKEN_SUCCESSFULLY))
                         .status(HttpStatus.OK)
                         .build());

@@ -9,6 +9,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -42,7 +44,7 @@ public class UserLogin extends BaseEntity implements UserDetails{
 	Long id;
 	
 	@Column(name = "user_name", length = 100)
-	String userName;
+	String username;
 	
 	@Column(name = "password", length = 20, nullable = false)
 	String password;
@@ -54,13 +56,14 @@ public class UserLogin extends BaseEntity implements UserDetails{
 	@JoinColumn(name =  "user_id")
 	User user;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "userLogin")
 	Set<Token> tokens;
 	
 	@ManyToOne
 	@JoinColumn(name = "role_id")
 	Role role;
-
+		
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
 		List<SimpleGrantedAuthority> authorityList = new ArrayList<>();
@@ -68,27 +71,27 @@ public class UserLogin extends BaseEntity implements UserDetails{
 
 		return authorityList;
 	}
-
+	
 	@Override
 	public String getUsername() {
-		return userName;
+		return username;
 	}
-
+	
 	@Override
 	public boolean isAccountNonExpired() {
 		return true;
 	}
-
+	
 	@Override
 	public boolean isAccountNonLocked() {
 		return true;
 	}
-
+	
 	@Override
 	public boolean isCredentialsNonExpired() {
 		return true;
 	}
-
+	
 	@Override
 	public boolean isEnabled() {
 		return true;

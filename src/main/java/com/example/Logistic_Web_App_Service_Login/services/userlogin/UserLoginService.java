@@ -48,9 +48,9 @@ public class UserLoginService implements IUserLoginService {
 	@Override
 	@Transactional
 	public UserLogin createUserLogin(UserLoginDTO userLoginDTO) throws Exception {
-		String userName = userLoginDTO.getUserName();
+		String username = userLoginDTO.getUserName();
 
-		if (userLoginRepository.existsByUserName(userName)) {
+		if (userLoginRepository.existsByUsername(username)) {
 			throw new DataIntegrityViolationException("Username exist");
 		}
 
@@ -81,7 +81,7 @@ public class UserLoginService implements IUserLoginService {
 
 	@Override
 	public String login(String userName, String password, String loginType) throws Exception {
-		Optional<UserLogin> optionalUserLogin = userLoginRepository.findByUserNameAndLoginType(userName, loginType);
+		Optional<UserLogin> optionalUserLogin = userLoginRepository.findByUsernameAndLoginType(userName, loginType);
 
 		if (optionalUserLogin.isEmpty()) {
 			throw new DataNotFoundException("Invalid phone number or password");
@@ -117,8 +117,8 @@ public class UserLoginService implements IUserLoginService {
 		if(jwtTokenUtil.isTokenExpired(token)) {
             throw new ExpiredTokenException("Token is expired");
         }
-        String userName = jwtTokenUtil.extractUserName(token);
-        Optional<UserLogin> userLogin = userLoginRepository.findByUserName(userName);
+        String username = jwtTokenUtil.extractUsername(token);
+        Optional<UserLogin> userLogin = userLoginRepository.findByUsername(username);
 
         if (userLogin.isPresent()) {
             return userLogin.get();
@@ -130,6 +130,7 @@ public class UserLoginService implements IUserLoginService {
 	@Override
 	public UserLogin getUserLoginDetailsFromRefreshToken(String refreshToken) throws Exception {
 		Token existingToken = tokenRepository.findByRefreshToken(refreshToken);
+		
         return getUserLoginDetailsFromToken(existingToken.getToken());
 	}
 

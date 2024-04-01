@@ -30,9 +30,9 @@ public class UserLoginDTO {
 	@JsonProperty("login_type")
 	String loginType;
 	
-	@JsonProperty("role_id")
+	@JsonProperty("user_id")
 	Long userId;
 	
-	@JsonProperty("user_id")
+	@JsonProperty("role_id")
 	Long roleId;
 }

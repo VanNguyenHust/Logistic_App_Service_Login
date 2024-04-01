@@ -2,6 +2,8 @@ package com.example.Logistic_Web_App_Service_Login.models;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -34,6 +36,7 @@ public class Role {
 	@Column(name = "name", length = 100, nullable = false, unique = true)
 	String name;
 	
+	@JsonIgnore
 	@OneToMany(mappedBy = "role")
 	List<UserLogin> userLogins;
 }
