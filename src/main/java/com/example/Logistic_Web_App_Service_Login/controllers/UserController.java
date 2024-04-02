@@ -46,8 +46,12 @@ public class UserController {
 		if (result.hasErrors()) {
 			List<String> errorMessages = result.getFieldErrors().stream().map(FieldError::getDefaultMessage).toList();
 
-			return ResponseEntity.badRequest().body(ResponseObject.builder().status(HttpStatus.BAD_REQUEST).data(null)
-					.message(errorMessages.toString()).build());
+			return ResponseEntity.badRequest()
+					.body(ResponseObject.builder()
+							.status(HttpStatus.BAD_REQUEST)
+							.data(null)
+							.message(errorMessages.toString())
+							.build());
 		}
 
 		User user = userService.createUser(userDTO);

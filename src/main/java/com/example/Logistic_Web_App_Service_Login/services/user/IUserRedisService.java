@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.data.domain.PageRequest;
 
+import com.example.Logistic_Web_App_Service_Login.models.User;
 import com.example.Logistic_Web_App_Service_Login.responses.UserResponse;
 
 public interface IUserRedisService {
@@ -13,5 +14,7 @@ public interface IUserRedisService {
 	
 	void saveAllUserByKeyword(List<UserResponse> userResponses, String keyword, PageRequest pageRequest) throws Exception;
 	
-	 
+	User getUserById(Long userId) throws Exception;
+	
+	void saveUserById(Long userId, User user) throws Exception;
 }

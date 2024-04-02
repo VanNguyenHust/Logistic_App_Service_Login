@@ -18,7 +18,7 @@ import lombok.experimental.FieldDefaults;
 public class UserLoginDTO {
 	@NotBlank(message = "Phone number is required")
 	@JsonProperty("user_name")
-	String userName;
+	String username;
 
 	@NotBlank(message = "Password cannot be blank")
 	String password;

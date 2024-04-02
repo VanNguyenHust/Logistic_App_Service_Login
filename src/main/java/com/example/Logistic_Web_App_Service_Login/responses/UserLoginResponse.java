@@ -4,6 +4,7 @@ import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
 
+import com.example.Logistic_Web_App_Service_Login.models.BaseEntity;
 import com.example.Logistic_Web_App_Service_Login.models.Role;
 import com.example.Logistic_Web_App_Service_Login.models.User;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -24,7 +25,7 @@ import lombok.experimental.FieldDefaults;
 @Builder
 @FieldDefaults(level = AccessLevel.PRIVATE)
 @JsonDeserialize(as = UserLoginResponse.class)
-public class UserLoginResponse {
+public class UserLoginResponse extends BaseEntity{
 	// user's detail
 	Long id;
 

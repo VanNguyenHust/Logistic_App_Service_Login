@@ -8,6 +8,7 @@ import org.springframework.data.domain.Sort;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import com.example.Logistic_Web_App_Service_Login.models.User;
 import com.example.Logistic_Web_App_Service_Login.responses.UserResponse;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -57,6 +58,35 @@ public class UserRedisService implements IUserRedisService {
 			throws Exception {
 		String key = this.getKeyFrom(keyword, pageRequest);
 		String json = redisObjectMapper.writeValueAsString(userResponses);
+		redisTemplate.opsForValue().set(key, json);
+	}
+
+	private String getKeyFromUserId(Long userId) {
+		String key = String.format("user_by_id:%d", userId);
+		
+		return key;
+	}
+
+	
+	@Override
+	public User getUserById(Long userId) throws Exception {
+		if (useRedisCache == false) {
+			return null;
+		}
+		String key = this.getKeyFromUserId(userId);
+		String json = (String) redisTemplate.opsForValue().get(key);
+		User user = json != null
+				? redisObjectMapper.readValue(json, new TypeReference<User>() {
+				})
+				: null;
+		return user;
+	}
+
+	@Override
+	public void saveUserById(Long userId, User user) throws Exception{
+		String key = this.getKeyFromUserId(userId);
+		String json = redisObjectMapper.writeValueAsString(user);
+		
 		redisTemplate.opsForValue().set(key, json);
 	}
 
