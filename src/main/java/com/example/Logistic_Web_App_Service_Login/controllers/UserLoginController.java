@@ -163,7 +163,7 @@ public class UserLoginController {
 	}
 
 	@PutMapping("/reset-password/{userLoginId}")
-	@PreAuthorize("hasRole('ROLE_USER')")
+//	@PreAuthorize("hasRole('ROLE_USER')") 
 	public ResponseEntity<ResponseObject> resetPassword(@Valid @PathVariable long userLoginId)
 			throws DataNotFoundException {
 		try {

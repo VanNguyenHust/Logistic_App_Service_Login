@@ -14,4 +14,9 @@ public class MessageKeys {
 	public static final String GET_ALL_USER_CONTAIN_KEYWORD_SUCCESSFULLY = "user.get_all_user_contain_keyword.successfully"; 
 	public static final String CREATE_USER_SUCCESSFULLY = "user.create.successfully";
 	public static final String CREATE_USER_NOT_ADMIN = "user.create.can_not_create_admin";
+
+	public static final String TENANT_GET_BY_ID_NOT_FOUND = "tenant.get_by_id.not_found";
+	public static final String TENANT_GET_BY_ID_SUCCESSFULLY = "tenant.get_by_id.successfully";
+	public static final String TENANT_CREATE_SUCCESSFULLY  = "tenant.create.successfully";
+
 }

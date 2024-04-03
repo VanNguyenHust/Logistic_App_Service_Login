@@ -7,12 +7,24 @@ CREATE TABLE roles(
     name ENUM('admin', 'user') NOT NULL UNIQUE 
 );
 
+CREATE TABLE tenants(
+    id INT PRIMARY KEY AUTO_INCREMENT,
+    code VARCHAR(100) NOT NULL,
+    name VARCHAR(100) NOT NULL,
+    translate_name VARCHAR(100) NOT NULL,
+    status VARCHAR(100) NOT NULL,
+    created_at DATETIME NOT NULL,
+    updated_at DATETIME NOT NULL
+);
+
 CREATE TABLE users(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(100),
     is_active TINYINT(1) DEFAULT 1,
     created_at DATETIME NOT NULL,
     updated_at DATETIME NOT NULL,
+    tenant_id INT NOT NULL,
+    FOREIGN KEY (tenant_id) REFERENCES tenants(id)
 );
 
 CREATE TABLE user_logins(

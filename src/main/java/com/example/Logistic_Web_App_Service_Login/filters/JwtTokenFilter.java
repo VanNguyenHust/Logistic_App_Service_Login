@@ -92,6 +92,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
 
 				Pair.of(String.format("%s/user", apiPrefix), "POST"),
 				Pair.of(String.format("%s/user-login**", apiPrefix), "POST"),
+				Pair.of(String.format("%s/user-login/reset-password**", apiPrefix), "PUT"),
 				Pair.of(String.format("%s/user/refreshToken", apiPrefix), "POST"),
 
 				// Swagger
