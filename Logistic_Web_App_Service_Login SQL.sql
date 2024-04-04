@@ -9,31 +9,33 @@ CREATE TABLE roles(
 
 CREATE TABLE tenants(
     id INT PRIMARY KEY AUTO_INCREMENT,
-    code VARCHAR(100) NOT NULL,
+    code VARCHAR(100) NOT NULL UNIQUE,
     name VARCHAR(100) NOT NULL,
     translate_name VARCHAR(100) NOT NULL,
     status VARCHAR(100) NOT NULL,
-    created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE users(
 	id INT PRIMARY KEY AUTO_INCREMENT,
     full_name VARCHAR(100),
+    last_name VARCHAR(100),
+    first_name VARCHAR(100),
     is_active TINYINT(1) DEFAULT 1,
-    created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     tenant_id INT NOT NULL,
     FOREIGN KEY (tenant_id) REFERENCES tenants(id)
 );
 
 CREATE TABLE user_logins(
 	id INT PRIMARY KEY  AUTO_INCREMENT,
-    user_name VARCHAR(100) NOT NULL,
+    user_name VARCHAR(100) NOT NULL UNIQUE,
     password VARCHAR(100) NOT NULL,
     login_type ENUM('phone_number', 'email'),
-    created_at DATETIME NOT NULL,
-    updated_at DATETIME NOT NULL,
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME DEFAULT CURRENT_TIMESTAMP,
     user_id INT NOT NULL,
     FOREIGN KEY (user_id) REFERENCES users(id)
     role_id INT NOT NULL,
