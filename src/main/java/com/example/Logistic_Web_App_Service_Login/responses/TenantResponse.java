@@ -1,6 +1,7 @@
 package com.example.Logistic_Web_App_Service_Login.responses;
 
-import com.example.Logistic_Web_App_Service_Login.models.User;
+import java.time.LocalDateTime;
+
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
@@ -25,6 +26,10 @@ public class TenantResponse {
 	String translateName;
 	
 	String status;
-	
-	User user;
+		
+	@JsonProperty("created_at")
+	LocalDateTime createdAt;
+
+	@JsonProperty("updated_at")
+	LocalDateTime updatedAt;
 }

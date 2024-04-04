@@ -132,7 +132,9 @@ public class UserLoginController {
 		return ResponseEntity.ok()
 				.body(ResponseObject.builder()
 						.message(localizationUtils.getLocalizedMessage(MessageKeys.LOGIN_SUCCESSFULLY))
-						.data(loginResponse).status(HttpStatus.OK).build());
+						.data(loginResponse)
+						.status(HttpStatus.OK)
+						.build());
 	}
 
 	@PostMapping("/refresh-token")
@@ -157,9 +159,11 @@ public class UserLoginController {
 				.id(jwtToken.getId()).build();
 
 		return ResponseEntity.ok()
-				.body(ResponseObject.builder().data(loginResponse)
+				.body(ResponseObject.builder()
+						.data(loginResponse)
 						.message(localizationUtils.getLocalizedMessage(MessageKeys.REFRESH_TOKEN_SUCCESSFULLY))
-						.status(HttpStatus.OK).build());
+						.status(HttpStatus.OK)
+						.build());
 	}
 
 	@PutMapping("/reset-password/{userLoginId}")
@@ -172,7 +176,9 @@ public class UserLoginController {
 
 			return ResponseEntity.ok(ResponseObject.builder()
 					.message(localizationUtils.getLocalizedMessage(MessageKeys.RESET_PASSWORD_SUCCESSFULLY))
-					.data(newPassword).status(HttpStatus.OK).build());
+					.data(newPassword)
+					.status(HttpStatus.OK)
+					.build());
 
 		} catch (InvalidPasswordException e) {
 			return ResponseEntity.ok(ResponseObject.builder().message("Invalid password").data("")
@@ -198,14 +204,24 @@ public class UserLoginController {
 
 			userLoginService.resetPassword(userLoginId, newPassword);
 
-			return ResponseEntity.ok(ResponseObject.builder().message("Change password successfully").data(newPassword)
-					.status(HttpStatus.OK).build());
+			return ResponseEntity.ok(ResponseObject.builder()
+					.message("Change password successfully")
+					.data(newPassword)
+					.status(HttpStatus.OK)
+					.build());
 		} catch (InvalidPasswordException e) {
-			return ResponseEntity.ok(ResponseObject.builder().message("Invalid password").data("")
-					.status(HttpStatus.BAD_REQUEST).build());
+			return ResponseEntity.ok(ResponseObject
+					.builder()
+					.message("Invalid password")
+					.data("")
+					.status(HttpStatus.BAD_REQUEST)
+					.build());
 		} catch (DataNotFoundException e) {
 			return ResponseEntity.ok(
-					ResponseObject.builder().message("User not found").data("").status(HttpStatus.BAD_REQUEST).build());
+					ResponseObject.builder()
+					.message("User not found")
+					.data("")
+					.status(HttpStatus.BAD_REQUEST).build());
 		}
 	}
 }

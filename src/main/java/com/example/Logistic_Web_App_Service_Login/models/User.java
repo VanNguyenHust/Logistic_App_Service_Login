@@ -34,17 +34,23 @@ public class User extends BaseEntity {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
 	Long id;
-	
+
 	@Column(name = "full_name", length = 100)
 	String fullName;
 	
+	@Column(name = "first_name", length = 100)
+	String firstName;
+	
+	@Column(name = "last_name", length = 100)
+	String lastName;
+
 	@Column(name = "is_active", columnDefinition = "TINYINT(1)")
 	short isActive;
-	
+
 	@JsonIgnore
 	@OneToMany(mappedBy = "user")
 	Set<UserLogin> userLogins;
-	
+
 	@OneToOne
 	@JoinColumn(name = "tenant_id")
 	Tenant tenant;

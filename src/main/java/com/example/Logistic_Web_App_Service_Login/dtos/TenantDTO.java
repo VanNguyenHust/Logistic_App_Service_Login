@@ -23,7 +23,4 @@ public class TenantDTO {
 	String translateName;
 	
 	String status;
-	
-	@JsonProperty("user_id")
-	Long userId;
 }

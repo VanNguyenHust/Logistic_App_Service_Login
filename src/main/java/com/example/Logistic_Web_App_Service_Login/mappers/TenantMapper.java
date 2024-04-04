@@ -14,5 +14,7 @@ public interface TenantMapper {
 	
 	Tenant mapToTenantEntity(TenantDTO tenantDTO);
 	
+	Tenant mapToTenantEntity(TenantResponse tenantResponse);
+	
 	TenantResponse mapToTenantResponse(Tenant tenant);
 }

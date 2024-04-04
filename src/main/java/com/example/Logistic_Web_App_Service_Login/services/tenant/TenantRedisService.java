@@ -19,10 +19,9 @@ public class TenantRedisService implements ITenantRedisService{
 	@Value("${spring.data.redis.use-redis-cache}")
 	private boolean useRedisCache;
 	
-	@SuppressWarnings("deprecation")
 	@Override
-	public void clear() {
-		redisTemplate.getConnectionFactory().getConnection().flushAll();
+	public void clear(Long tenantId) {
+		redisTemplate.delete(getKeyFromTenantId(tenantId));
 	}
 	
 	private String getKeyFromTenantId(Long tenantId) {

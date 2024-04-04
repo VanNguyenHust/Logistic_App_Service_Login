@@ -18,5 +18,8 @@ public class MessageKeys {
 	public static final String TENANT_GET_BY_ID_NOT_FOUND = "tenant.get_by_id.not_found";
 	public static final String TENANT_GET_BY_ID_SUCCESSFULLY = "tenant.get_by_id.successfully";
 	public static final String TENANT_CREATE_SUCCESSFULLY  = "tenant.create.successfully";
+	public static final String TENANT_UPDATE_SUCCESSFULLY  = "tenant.update.successfully";
+	public static final String TENANT_DELETE_FAILED_USER_LINKED = "tenant.delete.failed.user_linked";
+	public static final String TENANT_DELETE_SUCCESSFULLY = "tenant.delete.successfully";
 
 }

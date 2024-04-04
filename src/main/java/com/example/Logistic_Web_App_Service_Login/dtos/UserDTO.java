@@ -18,6 +18,15 @@ public class UserDTO {
 	@JsonProperty("full_name")
 	String fullName;
 	
+	@JsonProperty("first_name")
+	String firstName;
+	
+	@JsonProperty("last_name")
+	String lastName;
+	
 	@JsonProperty("is_active")
 	short isActive;
+	
+	@JsonProperty("tenant_id")
+	Long tenantId;
 }

@@ -2,6 +2,7 @@ package com.example.Logistic_Web_App_Service_Login.controllers;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -21,6 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Logistic_Web_App_Service_Login.components.LocalizationUtils;
 import com.example.Logistic_Web_App_Service_Login.dtos.UserDTO;
 import com.example.Logistic_Web_App_Service_Login.enums.Uri;
+import com.example.Logistic_Web_App_Service_Login.mappers.UserMapper;
 import com.example.Logistic_Web_App_Service_Login.models.User;
 import com.example.Logistic_Web_App_Service_Login.responses.UserResponse;
 import com.example.Logistic_Web_App_Service_Login.services.user.UserRedisService;
@@ -39,6 +41,9 @@ public class UserController {
 	private final UserService userService;
 
 	private final LocalizationUtils localizationUtils;
+	
+	@Autowired
+	UserMapper userMapper;
 
 	@PostMapping()
 	public ResponseEntity<ResponseObject> createUser(@Valid @RequestBody UserDTO userDTO, BindingResult result)
@@ -56,10 +61,7 @@ public class UserController {
 
 		User user = userService.createUser(userDTO);
 
-		UserResponse userResponse = UserResponse.builder()
-				.message(localizationUtils.getLocalizedMessage(MessageKeys.CREATE_USER_SUCCESSFULLY))
-				.user(user)
-				.build();
+		UserResponse userResponse = userMapper.mapToUserReponse(user);
 
 		return ResponseEntity.created(null).body(ResponseObject.builder()
 				.status(HttpStatus.CREATED)
@@ -90,6 +92,7 @@ public class UserController {
 		return ResponseEntity.ok(ResponseObject.builder()
 				.status(HttpStatus.OK)
 				.message(localizationUtils.getLocalizedMessage(MessageKeys.GET_ALL_USER_CONTAIN_KEYWORD_SUCCESSFULLY))
-				.data(userResponses).build());
+				.data(userResponses)
+				.build());
 	}
 }
