@@ -9,10 +9,12 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import com.example.Logistic_Web_App_Service_Login.listeners.UserLoginListener;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EntityListeners;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
@@ -31,6 +33,7 @@ import lombok.experimental.FieldDefaults;
 @SuppressWarnings("serial")
 @Entity
 @Table(name = "user_logins")
+@EntityListeners(value = UserLoginListener.class)
 @Getter
 @Setter
 @AllArgsConstructor

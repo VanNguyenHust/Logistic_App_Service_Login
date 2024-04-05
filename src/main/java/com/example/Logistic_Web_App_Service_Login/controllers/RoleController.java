@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.Logistic_Web_App_Service_Login.components.LocalizationUtils;
 import com.example.Logistic_Web_App_Service_Login.dtos.RoleDTO;
 import com.example.Logistic_Web_App_Service_Login.enums.Uri;
 import com.example.Logistic_Web_App_Service_Login.models.Role;
@@ -33,7 +32,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class RoleController {
 	private final RoleService roleService;
-	private final LocalizationUtils localizationUtils;
+//	private final LocalizationUtils localizationUtils;
 
 	@GetMapping("/{id}")
 	public ResponseEntity<ResponseObject> getRoleById(@PathVariable Long id) {

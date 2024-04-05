@@ -28,7 +28,7 @@ public class UserListener {
 	public void postPersist(User user) {
 		// Update Redis cache
 		logger.info("postPersist");
-		userRedisService.clear();
+		userRedisService.clearByUserId(user.getId());
 	}
 
 	@PreUpdate
@@ -41,7 +41,7 @@ public class UserListener {
 	public void postUpdate(User user) {
 		// Update Redis cache
 		logger.info("postUpdate");
-		userRedisService.clear();
+		userRedisService.clearByUserId(user.getId());
 	}
 
 	@PreRemove
@@ -54,6 +54,6 @@ public class UserListener {
 	public void postRemove(User user) {
 		// Update Redis cache
 		logger.info("postRemove");
-		userRedisService.clear();
+		userRedisService.clearByUserId(user.getId());
 	}
 }

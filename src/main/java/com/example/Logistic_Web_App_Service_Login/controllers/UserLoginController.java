@@ -68,7 +68,7 @@ public class UserLoginController {
 	public ResponseEntity<ResponseObject> createUserLogin(@Valid @RequestBody UserLoginDTO userLoginDTO)
 			throws Exception {
 		if (!userLoginDTO.getPassword().equals(userLoginDTO.getRetypePassword())) {
-			throw new BadCredentialsException(localizationUtils.getLocalizedMessage(MessageKeys.PASSWORD_NOT_MATCH));
+			throw new BadCredentialsException(localizationUtils.getLocalizedMessage(MessageKeys.USER_LOGIN_PASSWORD_NOT_MATCH));
 		}
 		
 		Long userId = userLoginDTO.getUserId();
@@ -98,7 +98,7 @@ public class UserLoginController {
 		userLoginRedisService.saveUserLoginByUsername(userLoginDTO.getUsername(), userLoginResponse);
 
 		return ResponseEntity.ok(ResponseObject.builder()
-				.message(localizationUtils.getLocalizedMessage(MessageKeys.CREATE_USER_LOGIN_SUCCESSFULLY))
+				.message(localizationUtils.getLocalizedMessage(MessageKeys.USER_LOGIN_CREATE_SUCCESSFULLY))
 				.status(HttpStatus.OK)
 				.data(userLoginResponse)
 				.build());
@@ -131,7 +131,7 @@ public class UserLoginController {
 
 		return ResponseEntity.ok()
 				.body(ResponseObject.builder()
-						.message(localizationUtils.getLocalizedMessage(MessageKeys.LOGIN_SUCCESSFULLY))
+						.message(localizationUtils.getLocalizedMessage(MessageKeys.USER_LOGIN_LOGIN_SUCCESSFULLY))
 						.data(loginResponse)
 						.status(HttpStatus.OK)
 						.build());
@@ -167,7 +167,6 @@ public class UserLoginController {
 	}
 
 	@PutMapping("/reset-password/{userLoginId}")
-//	@PreAuthorize("hasRole('ROLE_USER')") 
 	public ResponseEntity<ResponseObject> resetPassword(@Valid @PathVariable long userLoginId)
 			throws DataNotFoundException {
 		try {
@@ -175,7 +174,7 @@ public class UserLoginController {
 			userLoginService.resetPassword(userLoginId, newPassword);
 
 			return ResponseEntity.ok(ResponseObject.builder()
-					.message(localizationUtils.getLocalizedMessage(MessageKeys.RESET_PASSWORD_SUCCESSFULLY))
+					.message(localizationUtils.getLocalizedMessage(MessageKeys.USER_LOGIN_RESET_PASSWORD_SUCCESSFULLY))
 					.data(newPassword)
 					.status(HttpStatus.OK)
 					.build());
@@ -205,7 +204,7 @@ public class UserLoginController {
 			userLoginService.resetPassword(userLoginId, newPassword);
 
 			return ResponseEntity.ok(ResponseObject.builder()
-					.message("Change password successfully")
+					.message(localizationUtils.getLocalizedMessage(MessageKeys.USER_LOGIN_CHANGE_PASSWORD_SUCCESSFULLY))
 					.data(newPassword)
 					.status(HttpStatus.OK)
 					.build());
@@ -219,7 +218,7 @@ public class UserLoginController {
 		} catch (DataNotFoundException e) {
 			return ResponseEntity.ok(
 					ResponseObject.builder()
-					.message("User not found")
+					.message(localizationUtils.getLocalizedMessage(MessageKeys.USER_LOGIN_NOT_FOUND))
 					.data("")
 					.status(HttpStatus.BAD_REQUEST).build());
 		}

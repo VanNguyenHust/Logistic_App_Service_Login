@@ -42,7 +42,7 @@ public class TenantController {
 	TenantMapper tenantMapper;
 
 	@PostMapping()
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseObject> createTenant(@Valid @RequestBody TenantDTO tenantDTO) throws Exception {
 		Tenant tenant = tenantService.createTenant(tenantDTO);
 
@@ -59,6 +59,7 @@ public class TenantController {
 	}
 
 	@GetMapping("/{tenantId}")
+	@PreAuthorize("hasRole('ROLE_USER')")
 	public ResponseEntity<ResponseObject> getTenantById(@PathVariable Long tenantId) throws Exception {
 		TenantResponse tenantResponse = tenantRedisService.getTenantById(tenantId);
 

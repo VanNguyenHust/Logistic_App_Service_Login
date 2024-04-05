@@ -24,10 +24,9 @@ public class UserRedisService implements IUserRedisService {
 	@Value("${spring.data.redis.use-redis-cache}")
 	private boolean useRedisCache;
 
-	@SuppressWarnings("deprecation")
 	@Override
-	public void clear() {
-		redisTemplate.getConnectionFactory().getConnection().flushAll();
+	public void clearByUserId(Long userId) {
+		redisTemplate.delete(getKeyFromUserId(userId));
 	}
 
 	private String getKeyFrom(String keyword, PageRequest pageRequest) {

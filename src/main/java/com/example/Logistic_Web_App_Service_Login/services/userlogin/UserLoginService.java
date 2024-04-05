@@ -30,7 +30,6 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class UserLoginService implements IUserLoginService {
 	private final UserLoginRepository userLoginRepository;
-	private final UserLoginRedisService userLoginRedisService;
 	private final AuthenticationManager authenticationManager;
 
 	private final JwtTokenUtil jwtTokenUtil;

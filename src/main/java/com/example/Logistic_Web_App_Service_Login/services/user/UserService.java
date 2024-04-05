@@ -5,7 +5,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-import com.example.Logistic_Web_App_Service_Login.dtos.UserDTO;
 import com.example.Logistic_Web_App_Service_Login.exceptions.DataNotFoundException;
 import com.example.Logistic_Web_App_Service_Login.mappers.UserMapper;
 import com.example.Logistic_Web_App_Service_Login.models.User;
@@ -25,15 +24,13 @@ public class UserService implements IUserService {
 
 	@Override
 	@Transactional
-	public User createUser(UserDTO userDTO) {
-		User newUser = User.builder().fullName(userDTO.getFullName()).isActive(userDTO.getIsActive()).build();
-
-		return userRepository.save(newUser);
+	public User createUser(User user) {
+		return userRepository.save(user);
 	}
 
 	@Override
-	public User getUserById(Long userid) {
-		return userRepository.findById(userid).orElseThrow(() -> new RuntimeException("User not found"));
+	public User getUserById(Long userId) {
+		return userRepository.findById(userId).orElseThrow(() -> new RuntimeException("User not found"));
 	}
 
 	@Override

@@ -1,4 +1,4 @@
-  package com.example.Logistic_Web_App_Service_Login.mappers;
+package com.example.Logistic_Web_App_Service_Login.mappers;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.MappingConstants;

@@ -22,9 +22,14 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.Logistic_Web_App_Service_Login.components.LocalizationUtils;
 import com.example.Logistic_Web_App_Service_Login.dtos.UserDTO;
 import com.example.Logistic_Web_App_Service_Login.enums.Uri;
+import com.example.Logistic_Web_App_Service_Login.mappers.TenantMapper;
 import com.example.Logistic_Web_App_Service_Login.mappers.UserMapper;
+import com.example.Logistic_Web_App_Service_Login.models.Tenant;
 import com.example.Logistic_Web_App_Service_Login.models.User;
+import com.example.Logistic_Web_App_Service_Login.responses.TenantResponse;
 import com.example.Logistic_Web_App_Service_Login.responses.UserResponse;
+import com.example.Logistic_Web_App_Service_Login.services.tenant.TenantRedisService;
+import com.example.Logistic_Web_App_Service_Login.services.tenant.TenantService;
 import com.example.Logistic_Web_App_Service_Login.services.user.UserRedisService;
 import com.example.Logistic_Web_App_Service_Login.services.user.UserService;
 import com.example.Logistic_Web_App_Service_Login.utils.MessageKeys;
@@ -39,11 +44,15 @@ import lombok.RequiredArgsConstructor;
 public class UserController {
 	private final UserRedisService userRedisService;
 	private final UserService userService;
+	private final TenantRedisService tenantRedisService;
+	private final TenantService tenantService;
 
 	private final LocalizationUtils localizationUtils;
 	
 	@Autowired
 	UserMapper userMapper;
+	@Autowired
+	TenantMapper tenantMapper;
 
 	@PostMapping()
 	public ResponseEntity<ResponseObject> createUser(@Valid @RequestBody UserDTO userDTO, BindingResult result)
@@ -58,11 +67,23 @@ public class UserController {
 							.message(errorMessages.toString())
 							.build());
 		}
-
-		User user = userService.createUser(userDTO);
-
-		UserResponse userResponse = userMapper.mapToUserReponse(user);
-
+		
+		TenantResponse existingTenant = tenantRedisService.getTenantById(userDTO.getTenantId()); 
+		if (existingTenant == null) {
+			Tenant tenant = tenantService.getTenantById(userDTO.getTenantId());
+			
+			existingTenant = tenantMapper.mapToTenantResponse(tenant);
+			
+			tenantRedisService.saveTenantById(tenant.getId(), existingTenant);
+		}
+		
+		User newUser = userMapper.mapToUserEntity(userDTO);
+		newUser.setTenant(tenantMapper.mapToTenantEntity(existingTenant));
+		
+		UserResponse userResponse = userMapper.mapToUserReponse(userService.createUser(newUser));
+		
+		userRedisService.saveUserById(userResponse.getId(), newUser);
+		
 		return ResponseEntity.created(null).body(ResponseObject.builder()
 				.status(HttpStatus.CREATED)
 				.data(userResponse)
@@ -71,7 +92,7 @@ public class UserController {
 	}
 
 	@GetMapping("/all/{keyword}")
-	@PreAuthorize("hasRole('ROLE_USER')")
+	@PreAuthorize("hasRole('ROLE_ADMIN')")
 	public ResponseEntity<ResponseObject> getAllUserByKeyword(@PathVariable String keyword,
 			@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "3") int limit) throws Exception {
 		// Tạo Pageable từ thông tin trang và giới hạn

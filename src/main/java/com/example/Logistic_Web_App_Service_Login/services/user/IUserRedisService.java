@@ -8,7 +8,7 @@ import com.example.Logistic_Web_App_Service_Login.models.User;
 import com.example.Logistic_Web_App_Service_Login.responses.UserResponse;
 
 public interface IUserRedisService {
-	void clear();
+	void clearByUserId(Long userId);
 	
 	List<UserResponse> getAllUserByKeyword(String keyword, PageRequest pageRequest) throws Exception;
 	
