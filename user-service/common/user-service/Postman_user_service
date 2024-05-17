@@ -1,0 +1,704 @@
+{
+	"info": {
+		"_postman_id": "90a2d69c-89ff-4044-922c-13f3806aed06",
+		"name": "Logistic_Web_App_Service_Login",
+		"description": "# 🚀 Get started here\n\nThis template guides you through CRUD operations (GET, POST, PUT, DELETE), variables, and tests.\n\n## 🔖 **How to use this template**\n\n#### **Step 1: Send requests**\n\nRESTful APIs allow you to perform CRUD operations using the POST, GET, PUT, and DELETE HTTP methods.\n\nThis collection contains each of these [request](https://learning.postman.com/docs/sending-requests/requests/) types. Open each request and click \"Send\" to see what happens.\n\n#### **Step 2: View responses**\n\nObserve the response tab for status code (200 OK), response time, and size.\n\n#### **Step 3: Send new Body data**\n\nUpdate or add new data in \"Body\" in the POST request. Typically, Body data is also used in PUT request.\n\n```\n{\n    \"name\": \"Add your name in the body\"\n}\n\n ```\n\n#### **Step 4: Update the variable**\n\nVariables enable you to store and reuse values in Postman. We have created a [variable](https://learning.postman.com/docs/sending-requests/variables/) called `base_url` with the sample request [https://postman-api-learner.glitch.me](https://postman-api-learner.glitch.me). Replace it with your API endpoint to customize this collection.\n\n#### **Step 5: Add tests in the \"Tests\" tab**\n\nTests help you confirm that your API is working as expected. You can write test scripts in JavaScript and view the output in the \"Test Results\" tab.\n\n<img src=\"https://content.pstmn.io/b5f280a7-4b09-48ec-857f-0a7ed99d7ef8/U2NyZWVuc2hvdCAyMDIzLTAzLTI3IGF0IDkuNDcuMjggUE0ucG5n\">\n\n## 💪 Pro tips\n\n- Use folders to group related requests and organize the collection.\n- Add more [scripts](https://learning.postman.com/docs/writing-scripts/intro-to-scripts/) in \"Tests\" to verify if the API works as expected and execute workflows.\n    \n\n## 💡Related templates\n\n[API testing basics](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9a37a28-055b-49cd-8c7e-97494a21eb54&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[API documentation](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=e9c28f47-1253-44af-a2f3-20dce4da1f18&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)  \n[Authorization methods](https://go.postman.co/redirect/workspace?type=personal&collectionTemplateId=31a9a6ed-4cdf-4ced-984c-d12c9aec1c27&sourceTemplateId=ddb19591-3097-41cf-82af-c84273e56719)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "29349209"
+	},
+	"item": [
+		{
+			"name": "User",
+			"item": [
+				{
+					"name": "getAllUserByKeyword",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTG9naW4iOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJpZFwiOjEsXCJ1c2VybmFtZVwiOlwiMDM4NTQyNzY1NlwiLFwicGFzc3dvcmRcIjpcIiQyYSQxMCRmSzlXNGJWRG45LkJJQnRWRlRHLll1ZnVwbC5XQUljbUNJM2lYR2Q2bm9JYVNiaWhRRktKZVwiLFwibG9naW5UeXBlXCI6XCJwaG9uZV9udW1iZXJcIixcInVzZXJcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOm51bGwsXCJmaXJzdE5hbWVcIjpudWxsLFwibGFzdE5hbWVcIjpudWxsLFwicGhvbmVcIjpudWxsLFwiaXNBY3RpdmVcIjoxLFwidGVuYW50XCI6bnVsbCxcImRlcGFydG1lbnRcIjpudWxsfSxcInJvbGVcIjp7XCJpZFwiOjEsXCJuYW1lXCI6XCJ1c2VyXCJ9LFwiZW5hYmxlZFwiOnRydWUsXCJhY2NvdW50Tm9uRXhwaXJlZFwiOnRydWUsXCJjcmVkZW50aWFsc05vbkV4cGlyZWRcIjp0cnVlLFwiYXV0aG9yaXRpZXNcIjpbe1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dLFwiYWNjb3VudE5vbkxvY2tlZFwiOnRydWV9IiwidXNlck5hbWUiOiIwMzg1NDI3NjU2Iiwic3ViIjoiMDM4NTQyNzY1NiIsImV4cCI6MTcxODA0ODU2Nn0.wUtdun3pzuSFDRTPbFe6On5bW5DEPzkWzKzYrpaLPls",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "page",
+								"value": "1"
+							},
+							{
+								"key": "limit",
+								"value": "1"
+							},
+							{
+								"key": "keyword",
+								"value": "V"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/user/all",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"user",
+								"all"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updatdUser",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTG9naW4iOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJpZFwiOjEsXCJ1c2VybmFtZVwiOlwiMDM4NTQyNzY1NlwiLFwicGFzc3dvcmRcIjpcIiQyYSQxMCRmSzlXNGJWRG45LkJJQnRWRlRHLll1ZnVwbC5XQUljbUNJM2lYR2Q2bm9JYVNiaWhRRktKZVwiLFwibG9naW5UeXBlXCI6XCJwaG9uZV9udW1iZXJcIixcInVzZXJcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzIwMDUyXCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOlwiTmd1eeG7hW4gxJDDrG5oIFbEg25cIixcImZpcnN0TmFtZVwiOlwiVsSDblwiLFwibGFzdE5hbWVcIjpcIk5ndXnhu4VuIMSQw6xuaFwiLFwicGhvbmVcIjpcIjA5MTIzNDU2NzhcIixcImlzQWN0aXZlXCI6MSxcInRlbmFudFwiOntcImNyZWF0ZWRBdFwiOlwiMjAyNC0wNS0xMlQwMjo1MzowOC4xNTY2NzhcIixcInVwZGF0ZWRBdFwiOlwiMjAyNC0wNS0xMlQwMjo1MzowOC4xNTY2NzhcIixcImlkXCI6MSxcImNvZGVcIjpcIjEyMzQ1XCIsXCJuYW1lXCI6XCJHSFRcIixcInRyYW5zbGF0ZU5hbWVcIjpcIlRyYW5zbGF0ZSBleGFtcGxlXCIsXCJzdGF0dXNcIjpcImFjdGl2ZVwifSxcImRlcGFydG1lbnRcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzAzOTI3XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzAzOTI3XCIsXCJpZFwiOjEsXCJwYXJlbnREZXBhcnRtZW50SWRcIjoxMjM0NTYsXCJwYXJlbnREZXBhcnRtZW50Q29kZVwiOlwiUEFSRU5UMTIzXCIsXCJwYXRoXCI6XCIvcGFyZW50L2NoaWxkXCIsXCJsZXZlbFwiOjIsXCJ0eXBlXCI6XCJJbnRlcm5hbFwiLFwiY29kZVwiOlwiVE4yXCIsXCJuYW1lXCI6XCJIdW1hbiBSZXNvdXJjZXNcIixcInRyYW5zbGF0ZU5hbWVcIjpcIk5ow6JuIHPhu7FcIixcInN0YXR1c1wiOlwiQWN0aXZlXCJ9fSxcInJvbGVcIjp7XCJpZFwiOjEsXCJuYW1lXCI6XCJ1c2VyXCJ9LFwiZW5hYmxlZFwiOnRydWUsXCJhY2NvdW50Tm9uRXhwaXJlZFwiOnRydWUsXCJjcmVkZW50aWFsc05vbkV4cGlyZWRcIjp0cnVlLFwiYXV0aG9yaXRpZXNcIjpbe1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dLFwiYWNjb3VudE5vbkxvY2tlZFwiOnRydWV9IiwidXNlck5hbWUiOiIwMzg1NDI3NjU2Iiwic3ViIjoiMDM4NTQyNzY1NiIsImV4cCI6MTcxODA0OTc1MX0.YsiKY4Vbiq54wVladPUes98zZmN6u-6TQdrGsqxHLfk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "user_id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"full_name\": \"Nguyễn Đình Văn\",\r\n    \"first_name\": \"Văn\",\r\n    \"last_name\": \"Nguyễn Đình\",\r\n    \"phone\": \"0912345678\"\r\n}\r\n// OK\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/user",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"user"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "UserLogin",
+			"item": [
+				{
+					"name": "createUserLogin",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\": \"0385427656\",\r\n    \"password\": \"QuynhVan08@\",\r\n    \"retype_password\": \"QuynhVan08@\",\r\n    \"login_type\": \"phone_number\"\r\n}\r\n// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/user-login/register",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"user-login",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "login",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"username\" : \"0385427656\",\r\n    \"password\": \"QuynhVan08@\",\r\n    \"login_type\": \"phone_number\"\r\n}\r\n// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/user-login/login",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"user-login",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "refreshToken",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"refresh_token\": \"24163141-c6d4-45ba-be27-4f9fa873fdc7\",\r\n    \"token_type\": \"phone_number\"\r\n}\r\n// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/user-login/refresh-token",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"user-login",
+								"refresh-token"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "resetPassword",
+					"request": {
+						"auth": {
+							"type": "noauth"
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "user_login_id",
+								"value": ""
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/user-login/reset-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"user-login",
+								"reset-password"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "changePassword",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6InZhbmhvYTMwOTAzQGdtYWlsLmNvbSIsInVzZXIiOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTBUMTg6NDQ6MTkuNDE5Mzg5XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTBUMTg6NDQ6MTkuNDE5Mzg5XCIsXCJpZFwiOjQsXCJmdWxsTmFtZVwiOm51bGwsXCJmaXJzdE5hbWVcIjpudWxsLFwibGFzdE5hbWVcIjpudWxsLFwiaXNBY3RpdmVcIjoxLFwidGVuYW50XCI6bnVsbCxcImRlcGFydG1lbnRcIjpudWxsfSIsInN1YiI6InZhbmhvYTMwOTAzQGdtYWlsLmNvbSIsImV4cCI6MTcxNzk2MzM5MX0.1MiNQkFqKaBpeYEBrKl0mZm7xu8RUF46MErnDivmGVQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "user_login_id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"old_password\": \"B$whof\",\r\n    \"new_password\": \"QuynhVan08@\",\r\n    \"re_new_password\": \"QuynhVan08@\"\r\n}\r\n// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/user-login/change-password",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"user-login",
+								"change-password"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Tenant",
+			"item": [
+				{
+					"name": "getTenantById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6IjAzODU0Mjc2NTYiLCJ1c2VyIjoie1wiY3JlYXRlZEF0XCI6XCIyMDI0LTA1LTExVDE2OjQ5OjIzLjk3MjFcIixcInVwZGF0ZWRBdFwiOlwiMjAyNC0wNS0xMVQxNjo0OToyMy45NzIxXCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOm51bGwsXCJmaXJzdE5hbWVcIjpudWxsLFwibGFzdE5hbWVcIjpudWxsLFwiaXNBY3RpdmVcIjoxLFwidGVuYW50XCI6bnVsbCxcImRlcGFydG1lbnRcIjpudWxsfSIsInN1YiI6IjAzODU0Mjc2NTYiLCJleHAiOjE3MTgwMTMyMDR9.p3Yd5261US-qWIZwScXl0SkrprAfMMX9DywcfX8x2b8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "tenant_id",
+								"value": "1"
+							}
+						],
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/tenant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"tenant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "createTenant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTG9naW4iOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJpZFwiOjEsXCJ1c2VybmFtZVwiOlwiMDM4NTQyNzY1NlwiLFwicGFzc3dvcmRcIjpcIiQyYSQxMCRmSzlXNGJWRG45LkJJQnRWRlRHLll1ZnVwbC5XQUljbUNJM2lYR2Q2bm9JYVNiaWhRRktKZVwiLFwibG9naW5UeXBlXCI6XCJwaG9uZV9udW1iZXJcIixcInVzZXJcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOm51bGwsXCJmaXJzdE5hbWVcIjpudWxsLFwibGFzdE5hbWVcIjpudWxsLFwicGhvbmVcIjpudWxsLFwiaXNBY3RpdmVcIjoxLFwidGVuYW50XCI6bnVsbCxcImRlcGFydG1lbnRcIjpudWxsfSxcInJvbGVcIjp7XCJpZFwiOjEsXCJuYW1lXCI6XCJ1c2VyXCJ9LFwiZW5hYmxlZFwiOnRydWUsXCJhY2NvdW50Tm9uRXhwaXJlZFwiOnRydWUsXCJjcmVkZW50aWFsc05vbkV4cGlyZWRcIjp0cnVlLFwiYXV0aG9yaXRpZXNcIjpbe1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dLFwiYWNjb3VudE5vbkxvY2tlZFwiOnRydWV9IiwidXNlck5hbWUiOiIwMzg1NDI3NjU2Iiwic3ViIjoiMDM4NTQyNzY1NiIsImV4cCI6MTcxODA0ODU2Nn0.wUtdun3pzuSFDRTPbFe6On5bW5DEPzkWzKzYrpaLPls",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"12345\",\r\n    \"name\": \"GHT\",\r\n    \"translate_name\": \"Translate example\",\r\n    \"status\": \"active\",\r\n    \"user_id\": 1\r\n}\r\n// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/tenant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"tenant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateTenant",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTG9naW4iOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJpZFwiOjEsXCJ1c2VybmFtZVwiOlwiMDM4NTQyNzY1NlwiLFwicGFzc3dvcmRcIjpcIiQyYSQxMCRmSzlXNGJWRG45LkJJQnRWRlRHLll1ZnVwbC5XQUljbUNJM2lYR2Q2bm9JYVNiaWhRRktKZVwiLFwibG9naW5UeXBlXCI6XCJwaG9uZV9udW1iZXJcIixcInVzZXJcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzIwMDUyXCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOlwiTmd1eeG7hW4gxJDDrG5oIFbEg25cIixcImZpcnN0TmFtZVwiOlwiVsSDblwiLFwibGFzdE5hbWVcIjpcIk5ndXnhu4VuIMSQw6xuaFwiLFwicGhvbmVcIjpcIjA5MTIzNDU2NzhcIixcImlzQWN0aXZlXCI6MSxcInRlbmFudFwiOntcImNyZWF0ZWRBdFwiOlwiMjAyNC0wNS0xMlQwMjo1MzowOC4xNTY2NzhcIixcInVwZGF0ZWRBdFwiOlwiMjAyNC0wNS0xMlQwMjo1MzowOC4xNTY2NzhcIixcImlkXCI6MSxcImNvZGVcIjpcIjEyMzQ1XCIsXCJuYW1lXCI6XCJHSFRcIixcInRyYW5zbGF0ZU5hbWVcIjpcIlRyYW5zbGF0ZSBleGFtcGxlXCIsXCJzdGF0dXNcIjpcImFjdGl2ZVwifSxcImRlcGFydG1lbnRcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzAzOTI3XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzAzOTI3XCIsXCJpZFwiOjEsXCJwYXJlbnREZXBhcnRtZW50SWRcIjoxMjM0NTYsXCJwYXJlbnREZXBhcnRtZW50Q29kZVwiOlwiUEFSRU5UMTIzXCIsXCJwYXRoXCI6XCIvcGFyZW50L2NoaWxkXCIsXCJsZXZlbFwiOjIsXCJ0eXBlXCI6XCJJbnRlcm5hbFwiLFwiY29kZVwiOlwiVE4yXCIsXCJuYW1lXCI6XCJIdW1hbiBSZXNvdXJjZXNcIixcInRyYW5zbGF0ZU5hbWVcIjpcIk5ow6JuIHPhu7FcIixcInN0YXR1c1wiOlwiQWN0aXZlXCJ9fSxcInJvbGVcIjp7XCJpZFwiOjEsXCJuYW1lXCI6XCJ1c2VyXCJ9LFwiZW5hYmxlZFwiOnRydWUsXCJhY2NvdW50Tm9uRXhwaXJlZFwiOnRydWUsXCJjcmVkZW50aWFsc05vbkV4cGlyZWRcIjp0cnVlLFwiYXV0aG9yaXRpZXNcIjpbe1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dLFwiYWNjb3VudE5vbkxvY2tlZFwiOnRydWV9IiwidXNlck5hbWUiOiIwMzg1NDI3NjU2Iiwic3ViIjoiMDM4NTQyNzY1NiIsImV4cCI6MTcxODA0OTc1MX0.YsiKY4Vbiq54wVladPUes98zZmN6u-6TQdrGsqxHLfk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "tenant_id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"code\": \"12345\",\r\n    \"name\": \"GHTK\",\r\n    \"translate_name\": \"Translate example\",\r\n    \"status\": \"active\"\r\n}\r\n// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/tenant",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"tenant"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteTenantById",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6InZhbmhvYTMwOTAzQGdtYWlsLmNvbSIsInVzZXIiOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTBUMTg6NDQ6MTkuNDE5Mzg5XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTFUMDM6NDA6MTEuNTc2NzZcIixcImlkXCI6NCxcImZ1bGxOYW1lXCI6XCJOZ3V54buFbiDEkMOsbmggVsSDblwiLFwiZmlyc3ROYW1lXCI6XCJOZ3V54buFbiDEkMOsbmhcIixcImxhc3ROYW1lXCI6XCJWxINuXCIsXCJpc0FjdGl2ZVwiOjAsXCJ0ZW5hbnRcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTFUMDM6MjQ6MTMuNzk2MzAxXCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTFUMDM6MjQ6MTMuNzk2MzAxXCIsXCJpZFwiOjcsXCJjb2RlXCI6XCIxMjM0NVwiLFwibmFtZVwiOlwiR0hUXCIsXCJ0cmFuc2xhdGVOYW1lXCI6XCJUcmFuc2xhdGUgZXhhbXBsZVwiLFwic3RhdHVzXCI6XCJhY3RpdmVcIn0sXCJkZXBhcnRtZW50XCI6bnVsbH0iLCJzdWIiOiJ2YW5ob2EzMDkwM0BnbWFpbC5jb20iLCJleHAiOjE3MTc5NjU3ODV9.Xh3DZ8cMJsVQL-YYgNG223sDNr0TMP-uBn6ZxY8dwlQ",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "tenant_id",
+								"value": "7"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/tenant/7",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"tenant",
+								"7"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "department",
+			"item": [
+				{
+					"name": "createDepartment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTG9naW4iOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJpZFwiOjEsXCJ1c2VybmFtZVwiOlwiMDM4NTQyNzY1NlwiLFwicGFzc3dvcmRcIjpcIiQyYSQxMCRmSzlXNGJWRG45LkJJQnRWRlRHLll1ZnVwbC5XQUljbUNJM2lYR2Q2bm9JYVNiaWhRRktKZVwiLFwibG9naW5UeXBlXCI6XCJwaG9uZV9udW1iZXJcIixcInVzZXJcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOm51bGwsXCJmaXJzdE5hbWVcIjpudWxsLFwibGFzdE5hbWVcIjpudWxsLFwicGhvbmVcIjpudWxsLFwiaXNBY3RpdmVcIjoxLFwidGVuYW50XCI6bnVsbCxcImRlcGFydG1lbnRcIjpudWxsfSxcInJvbGVcIjp7XCJpZFwiOjEsXCJuYW1lXCI6XCJ1c2VyXCJ9LFwiZW5hYmxlZFwiOnRydWUsXCJhY2NvdW50Tm9uRXhwaXJlZFwiOnRydWUsXCJjcmVkZW50aWFsc05vbkV4cGlyZWRcIjp0cnVlLFwiYXV0aG9yaXRpZXNcIjpbe1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dLFwiYWNjb3VudE5vbkxvY2tlZFwiOnRydWV9IiwidXNlck5hbWUiOiIwMzg1NDI3NjU2Iiwic3ViIjoiMDM4NTQyNzY1NiIsImV4cCI6MTcxODA0ODU2Nn0.wUtdun3pzuSFDRTPbFe6On5bW5DEPzkWzKzYrpaLPls",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"parent_department_id\": 123456,\r\n  \"parent_department_code\": \"PARENT123\",\r\n  \"path\": \"/parent/child\",\r\n  \"level\": 2,\r\n  \"type\": \"Internal\",\r\n  \"code\": \"TN2\",\r\n  \"name\": \"Human Resources\",\r\n  \"translate_name\": \"Nhân sự\",\r\n  \"status\": \"Active\",\r\n  \"user_id\": 1\r\n}\r\n// OK\r\n",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/department",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"department"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "getDepartmentById",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6IjAzODU0Mjc2NTYiLCJ1c2VyIjoie1wiY3JlYXRlZEF0XCI6XCIyMDI0LTA1LTExVDE2OjQ5OjIzLjk3MjFcIixcInVwZGF0ZWRBdFwiOlwiMjAyNC0wNS0xMVQxNjo0OToyMy45NzIxXCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOm51bGwsXCJmaXJzdE5hbWVcIjpudWxsLFwibGFzdE5hbWVcIjpudWxsLFwiaXNBY3RpdmVcIjoxLFwidGVuYW50XCI6bnVsbCxcImRlcGFydG1lbnRcIjpudWxsfSIsInN1YiI6IjAzODU0Mjc2NTYiLCJleHAiOjE3MTgwMTMyMDR9.p3Yd5261US-qWIZwScXl0SkrprAfMMX9DywcfX8x2b8",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "department_id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/department",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"department"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "updateDepartment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTG9naW4iOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuODU0MzUyXCIsXCJpZFwiOjEsXCJ1c2VybmFtZVwiOlwiMDM4NTQyNzY1NlwiLFwicGFzc3dvcmRcIjpcIiQyYSQxMCRmSzlXNGJWRG45LkJJQnRWRlRHLll1ZnVwbC5XQUljbUNJM2lYR2Q2bm9JYVNiaWhRRktKZVwiLFwibG9naW5UeXBlXCI6XCJwaG9uZV9udW1iZXJcIixcInVzZXJcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NDA6MzQuNTcwMDk2XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzIwMDUyXCIsXCJpZFwiOjEsXCJmdWxsTmFtZVwiOlwiTmd1eeG7hW4gxJDDrG5oIFbEg25cIixcImZpcnN0TmFtZVwiOlwiVsSDblwiLFwibGFzdE5hbWVcIjpcIk5ndXnhu4VuIMSQw6xuaFwiLFwicGhvbmVcIjpcIjA5MTIzNDU2NzhcIixcImlzQWN0aXZlXCI6MSxcInRlbmFudFwiOntcImNyZWF0ZWRBdFwiOlwiMjAyNC0wNS0xMlQwMjo1MzowOC4xNTY2NzhcIixcInVwZGF0ZWRBdFwiOlwiMjAyNC0wNS0xMlQwMjo1MzowOC4xNTY2NzhcIixcImlkXCI6MSxcImNvZGVcIjpcIjEyMzQ1XCIsXCJuYW1lXCI6XCJHSFRcIixcInRyYW5zbGF0ZU5hbWVcIjpcIlRyYW5zbGF0ZSBleGFtcGxlXCIsXCJzdGF0dXNcIjpcImFjdGl2ZVwifSxcImRlcGFydG1lbnRcIjp7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzAzOTI3XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTJUMDI6NTU6MDguNzAzOTI3XCIsXCJpZFwiOjEsXCJwYXJlbnREZXBhcnRtZW50SWRcIjoxMjM0NTYsXCJwYXJlbnREZXBhcnRtZW50Q29kZVwiOlwiUEFSRU5UMTIzXCIsXCJwYXRoXCI6XCIvcGFyZW50L2NoaWxkXCIsXCJsZXZlbFwiOjIsXCJ0eXBlXCI6XCJJbnRlcm5hbFwiLFwiY29kZVwiOlwiVE4yXCIsXCJuYW1lXCI6XCJIdW1hbiBSZXNvdXJjZXNcIixcInRyYW5zbGF0ZU5hbWVcIjpcIk5ow6JuIHPhu7FcIixcInN0YXR1c1wiOlwiQWN0aXZlXCJ9fSxcInJvbGVcIjp7XCJpZFwiOjEsXCJuYW1lXCI6XCJ1c2VyXCJ9LFwiZW5hYmxlZFwiOnRydWUsXCJhY2NvdW50Tm9uRXhwaXJlZFwiOnRydWUsXCJjcmVkZW50aWFsc05vbkV4cGlyZWRcIjp0cnVlLFwiYXV0aG9yaXRpZXNcIjpbe1wiYXV0aG9yaXR5XCI6XCJST0xFX1VTRVJcIn1dLFwiYWNjb3VudE5vbkxvY2tlZFwiOnRydWV9IiwidXNlck5hbWUiOiIwMzg1NDI3NjU2Iiwic3ViIjoiMDM4NTQyNzY1NiIsImV4cCI6MTcxODA0OTc1MX0.YsiKY4Vbiq54wVladPUes98zZmN6u-6TQdrGsqxHLfk",
+									"type": "string"
+								}
+							]
+						},
+						"method": "PUT",
+						"header": [
+							{
+								"key": "department_id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"parent_department_id\": 123456,\r\n  \"parent_department_code\": \"PARENT123\",\r\n  \"path\": \"/parent/child\",\r\n  \"level\": 2,\r\n  \"type\": \"Internal\",\r\n  \"code\": \"DEP001\",\r\n  \"name\": \"Human Resour1\",\r\n  \"translate_name\": \"Nhân sự\",\r\n  \"status\": \"Active\"\r\n}\r\n// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/department",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"department"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "deleteDepartment",
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyTmFtZSI6InZhbmhvYTMwOTAzQGdtYWlsLmNvbSIsInVzZXIiOiJ7XCJjcmVhdGVkQXRcIjpcIjIwMjQtMDUtMTBUMTg6NDQ6MTkuNDE5Mzg5XCIsXCJ1cGRhdGVkQXRcIjpcIjIwMjQtMDUtMTBUMTg6NDQ6MTkuNDE5Mzg5XCIsXCJpZFwiOjQsXCJmdWxsTmFtZVwiOm51bGwsXCJmaXJzdE5hbWVcIjpudWxsLFwibGFzdE5hbWVcIjpudWxsLFwiaXNBY3RpdmVcIjoxLFwidGVuYW50XCI6bnVsbCxcImRlcGFydG1lbnRcIjpudWxsfSIsInN1YiI6InZhbmhvYTMwOTAzQGdtYWlsLmNvbSIsImV4cCI6MTcxNzk2MzQ2Nn0.11NX1aRDBsjH3BJhoaxw8daHeCM7QOeFVCDyYpgnQ7c",
+									"type": "string"
+								}
+							]
+						},
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "department_id",
+								"value": "1"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "// OK",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost:9000/api/v1/user-service/department",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"port": "9000",
+							"path": [
+								"api",
+								"v1",
+								"user-service",
+								"department"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "id",
+			"value": "1"
+		},
+		{
+			"key": "base_url",
+			"value": "https://postman-rest-api-learner.glitch.me/"
+		}
+	]
+}
